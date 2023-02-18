@@ -41,7 +41,7 @@ namespace WinCMD
                         break;
 
                     case "internet":
-                        Console.WriteLine(InternetUtilities.InternetAvailable);
+                        Console.WriteLine(InternetUtilities.IsInternetAvailable);
                         break;
 
                     case "cpu":

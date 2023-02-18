@@ -9,7 +9,7 @@ namespace WinCMD.Utilities
     {
         /// <summary>Retrieves the connected state of the local system.</summary>
         /// <returns>The <see cref="bool" />.</returns>
-        public static bool InternetAvailable
+        public static bool IsInternetAvailable
         {
             get
             {
