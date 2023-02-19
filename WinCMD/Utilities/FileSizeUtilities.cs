@@ -35,8 +35,7 @@ namespace WinCMD.Utilities
         /// <summary>
         ///     The long names.
         /// </summary>
-        public static string[] LongNames =
-            {"Byte", "Kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte", "Zettabyte", "Yottabyte"};
+        public static string[] LongNames = {"Byte", "Kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte", "Zettabyte", "Yottabyte"};
 
         /// <summary>
         ///     Gets the readable size.
@@ -60,7 +59,7 @@ namespace WinCMD.Utilities
                     throw new ArgumentOutOfRangeException(nameof(nameSize), nameSize, null);
             }
 
-            double length = size;
+            double length = Convert.ToDouble(size);
             int order = 0;
 
             while (length >= FileSplit && order < sizes.Length - 1)
@@ -83,6 +82,16 @@ namespace WinCMD.Utilities
         /// <returns>The readable file size.</returns>
         public static string GetReadableFileSize(string path, NameSize nameSize = NameSize.Short)
         {
+            if (string.IsNullOrEmpty(path))
+            {
+                throw new ArgumentNullException(nameof(path), "Cannot be null or empty.");
+            }
+
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException("Cannot find the file.", path);
+            }
+
             long length = new FileInfo(path).Length;
 
             return GetReadableSize(length, nameSize);
